@@ -185,7 +185,7 @@ public static class FFmpegWrapper
         var args = string.Format(
             CultureInfo.InvariantCulture,
             "-vn -sn -dn " +
-                "-i \"{0}\" -to {1} -af \"silencedetect=noise={2}dB:duration=0.1\" -f null -",
+                "-i \"{0}\" -to {1} -af \"silencedetect=noise={2}dB:duration=0.1\" -f null -hwaccel auto -",
             episode.Path,
             limit,
             Plugin.Instance?.Configuration.SilenceDetectionMaximumNoise ?? -50);
@@ -237,7 +237,7 @@ public static class FFmpegWrapper
         // Seek to the start of the time range and find frames that are at least 50% black.
         var args = string.Format(
             CultureInfo.InvariantCulture,
-            "-ss {0} -i \"{1}\" -to {2} -an -dn -sn -vf \"blackframe=amount=50\" -f null -",
+            "-ss {0} -i \"{1}\" -to {2} -an -dn -sn -vf \"blackframe=amount=50\" -f null -hwaccel auto -",
             range.Start,
             episode.Path,
             range.End - range.Start);
@@ -478,7 +478,7 @@ public static class FFmpegWrapper
 
         var args = string.Format(
             CultureInfo.InvariantCulture,
-            "-ss {0} -i \"{1}\" -to {2} -ac 2 -f chromaprint -fp_format raw -",
+            "-ss {0} -i \"{1}\" -to {2} -ac 2 -f chromaprint -fp_format raw -hwaccel auto -",
             start,
             episode.Path,
             end - start);
